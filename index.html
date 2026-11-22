@@ -47,10 +47,11 @@ section[hidden]{display:none}
 .hl{font-size:25px;font-weight:800;margin:0}
 .sub{color:#c9c9d6;font-size:14px;margin-top:3px}
 .stage{position:relative;height:250px;margin:0 -14px}
-.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;
+  -webkit-mask-image:linear-gradient(to bottom,#000 86%,transparent);mask-image:linear-gradient(to bottom,#000 86%,transparent)}
 .hstats{display:grid;grid-template-columns:80px 1fr 1fr;gap:10px;align-items:stretch}
 .ringbox{position:relative;width:80px;height:80px}
-.ringbox svg{width:80px;height:80px;display:block}
+.ringbox svg{width:100%;height:100%;display:block}
 .rt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
 .rt b{font-size:17px}.rt span{font-size:10px;color:var(--mut)}
 .hs{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;justify-content:center;gap:2px}
@@ -78,7 +79,8 @@ section[hidden]{display:none}
 .calhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .calhead b{font-size:16px}
 .calhead button{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:16px;cursor:pointer}
-.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.hside,.hmain{min-width:0}
 .wd{text-align:center;font-size:11px;color:var(--mut)}
 .day{aspect-ratio:1;border-radius:10px;border:1px solid var(--line);background:var(--card2);color:var(--tx);font-size:13px;cursor:pointer;padding:0}
 .day.full{background:var(--fire);color:#1a0d02;font-weight:700;border-color:var(--fire)}
@@ -93,7 +95,7 @@ section[hidden]{display:none}
 .banner h1{margin:0;font-size:28px}
 .banner p{margin:4px 0 10px;color:#d6c3b3;font-size:14px;max-width:210px}
 .banner svg.chest{width:112px;height:98px;filter:drop-shadow(0 0 16px rgba(255,170,40,.65))}
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
 .shopcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:7px}
 .shopcard.cur{border-color:var(--fire);box-shadow:0 0 14px rgba(255,122,26,.25)}
 .shopcard b{font-size:15px}
@@ -149,7 +151,7 @@ section[hidden]{display:none}
 .bar i{display:block;height:100%;background:linear-gradient(90deg,#ffb347,#ff4d12);border-radius:999px}
 
 /* ---------- pastki menyu ---------- */
-.nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(480px,100%);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 10px calc(8px + env(safe-area-inset-bottom));
+.nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(720px,100%);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 10px calc(8px + env(safe-area-inset-bottom));
   background:rgba(12,10,12,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid rgba(255,122,26,.4);border-radius:20px 20px 0 0;z-index:10;box-shadow:0 -6px 30px rgba(255,90,20,.14)}
 .nav button{background:none;border:0;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;padding:6px 0;cursor:pointer}
 .nav button.on{color:var(--fire);font-weight:700}
@@ -171,12 +173,53 @@ section[hidden]{display:none}
 @keyframes shake{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
 .toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#fff;color:#111;padding:10px 16px;border-radius:12px;font-size:14px;z-index:40;opacity:0;pointer-events:none;transition:opacity .25s;max-width:90%;text-align:center}
 .toast.show{opacity:1}
+
+/* ---------- kenglikka moslashish ---------- */
+.topnav{display:none}
+.pcol{min-width:0}
+@media (min-width:640px){
+  .wrap{max-width:720px}
+}
+@media (min-width:900px){
+  .wrap{max-width:1180px;padding:20px 28px 48px}
+  .nav{display:none}
+  .topnav{display:flex;gap:6px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:999px;padding:5px}
+  .topnav button{background:none;border:0;color:#cfcfdc;font-size:15px;padding:9px 22px;border-radius:999px;cursor:pointer;font-weight:600}
+  .topnav button.on{background:linear-gradient(90deg,#ff9a2a,#ff5a14);color:#1a0d02;font-weight:800}
+  .topnav button:hover:not(.on){background:rgba(255,255,255,.08)}
+  .top{margin-bottom:12px}
+  .hero{display:grid;grid-template-columns:1fr 380px 1fr;align-items:center;gap:12px;padding:20px 28px;margin-top:0}
+  .hl{font-size:32px;line-height:1.1}
+  .sub{font-size:16px;margin-top:8px}
+  .stage{height:310px;margin:0}
+  .hstats{grid-template-columns:120px 1fr;grid-template-rows:1fr 1fr;gap:12px}
+  .ringbox{width:120px;height:120px;grid-row:span 2;align-self:center}
+  .rt b{font-size:24px}.rt span{font-size:12px}
+  .hs b{font-size:22px}
+  .hwrap{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:22px;align-items:start}
+  #list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
+  .finish{grid-column:1/-1}
+  .item{font-size:15px;padding:12px}
+  .cal{margin-top:20px}
+  .banner{padding:26px 32px}
+  .banner h1{font-size:38px}
+  .banner p{max-width:420px;font-size:16px}
+  .banner svg.chest{width:190px;height:166px}
+  #t-rank{max-width:920px;margin-left:auto;margin-right:auto}
+  .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 22px;align-items:start}
+}
 </style>
 </head>
 <body class="bg-qora">
 <div class="wrap">
   <div class="top">
     <div class="logo"><span id="logoFl"></span>Olov</div>
+    <nav class="topnav" id="topnav">
+      <button data-tab="habits">Odatlar</button>
+      <button data-tab="shop">Do'kon</button>
+      <button data-tab="rank">Reyting</button>
+      <button data-tab="me">Profil</button>
+    </nav>
     <div class="tr">
       <div class="chip" id="chip"><span class="coin"></span><b id="tokTop">0</b></div>
       <button class="iconbtn" id="snd" title="Ovoz">🔊</button>
@@ -186,8 +229,7 @@ section[hidden]{display:none}
   <!-- ODATLAR -->
   <section id="t-habits">
     <div class="hero">
-      <h1 class="hl">Bugungi oloving 🔥</h1>
-      <div class="sub" id="msg"></div>
+      <div class="hleft"><h1 class="hl">Bugungi oloving 🔥</h1><div class="sub" id="msg"></div></div>
       <div class="stage" id="stage"><canvas id="fire"></canvas></div>
       <div class="hstats">
         <div class="ringbox" id="ring"></div>
@@ -196,16 +238,21 @@ section[hidden]{display:none}
       </div>
     </div>
 
-    <div class="seld"><b id="selLabel"></b><span class="note" id="selNote"></span></div>
-    <div id="list"></div>
-
-    <div class="cal">
-      <div class="calhead">
-        <button id="prev">‹</button>
-        <b id="calTitle"></b>
-        <button id="next">›</button>
+    <div class="hwrap">
+      <div class="hmain">
+        <div class="seld"><b id="selLabel"></b><span class="note" id="selNote"></span></div>
+        <div id="list"></div>
       </div>
-      <div class="grid" id="grid"></div>
+      <aside class="hside">
+        <div class="cal">
+          <div class="calhead">
+            <button id="prev">‹</button>
+            <b id="calTitle"></b>
+            <button id="next">›</button>
+          </div>
+          <div class="grid" id="grid"></div>
+        </div>
+      </aside>
     </div>
   </section>
 
@@ -217,6 +264,7 @@ section[hidden]{display:none}
 
   <!-- PROFIL -->
   <section id="t-me" hidden>
+   <div class="pgrid"><div class="pcol">
     <div class="pcard">
       <div class="pav" id="pav"></div>
       <div class="pinfo">
@@ -233,6 +281,7 @@ section[hidden]{display:none}
     <h2 class="sec">Statistika</h2>
     <div class="stats3" id="meStats"></div>
 
+   </div><div class="pcol">
     <h2 class="sec">Maqsad</h2>
     <div class="goal" id="goal"></div>
 
@@ -241,6 +290,7 @@ section[hidden]{display:none}
 
     <h2 class="sec">Sinxron</h2>
     <div class="goal"><div class="note" id="syncNote" style="margin-bottom:10px"></div><div id="auth"></div></div>
+   </div></div>
   </section>
 </div>
 
@@ -291,16 +341,16 @@ const HABITS = [
     ["wake", "O'z vaqtida turish"], ["bed", "To'shakni yig'ish"], ["face", "Betni yuvish"],
     ["teeth", "Tish yuvish"], ["water", "Bir stakan suv ichish"], ["push", "Otjimaniya"], ["abs", "Press"] ] },
   { g: "Kunduzi", icon: "☀️", items: [
-    ["hw", "Uy vazifasi"], ["word", "Yangi so'z yodlash"], ["veg", "Sabzavot yeyish"],
+    ["hw", "Uy vazifasi"], ["word", "Yangi so'z yodlash"], ["veg", "Sabzavot yeyish"], ["fruit", "Meva yeyish"],
     ["walk", "10 daqiqa piyoda yurish"], ["read", "5 daqiqa kitob o'qish"], ["dish", "Ovqatdan keyin idish-tovoq yuvish"],
     ["talk", "10 daqiqa bir odam bilan gaplashish"] ] },
   { g: "Kechqurun", icon: "🌙", items: [
     ["socks", "Paypoqni yuvish"], ["clothes", "Ertangi kiyimni tayyorlash"], ["hair", "Soch va tirnoq parvarishi (haftada 2 marta)"],
     ["shoes", "Oyoq kiyimni tozalash"], ["facecare", "Betga qarash (parvarish)"], ["foot", "Oyoqni vanna qilish"],
-    ["beard", "Mo'ylov va soqolga qarash"] ] }
+    ["beard", "Mo'ylov va soqolga qarash"], ["folder", "Raspisaniyani papkaga solish"] ] }
 ];
 const N = HABITS.reduce((a, g) => a + g.items.length, 0);
-const PUSH_N = 30, ABS_START = 10;
+const PUSH_BASE = 30, PUSH_START = "2026-11-23", ABS_START = 10; // otjimaniya: 30, har hafta +1
 const DECAY = 0.75; // o'tkazib yuborilgan har kunda olov shu ulushgacha pasayadi
 const MONTHS = ["Yanvar","Fevral","Mart","Aprel","May","Iyun","Iyul","Avgust","Sentyabr","Oktyabr","Noyabr","Dekabr"];
 const WD = ["Du","Se","Ch","Pa","Ju","Sh","Ya"];
@@ -397,6 +447,10 @@ function absTarget(k) {
   let c = 0;
   for (const d in state.done) if (d < k && state.done[d].includes("abs")) c++;
   return ABS_START + c;
+}
+function pushTarget(k) {
+  const days = Math.round((parseKey(k) - parseKey(PUSH_START)) / 864e5);
+  return PUSH_BASE + Math.max(0, Math.floor(days / 7));
 }
 const levelName = () => { let n = LEVELS[0][1]; LEVELS.forEach(([t, nm]) => { if (totalTok() >= t) n = nm; }); return n; };
 
@@ -532,7 +586,7 @@ function frame(now) {
   }
 
   if (W > 0 && H > 0) {
-    const base = H - 46, cx = W / 2;
+    const base = H - 52, cx = W / 2;
     ctx.globalCompositeOperation = "source-over";
     ctx.clearRect(0, 0, W, H);
     ctx.globalCompositeOperation = "lighter";
@@ -542,6 +596,8 @@ function frame(now) {
     const g = ctx.createRadialGradient(cx, base, 0, cx, base, gr);
     const ga = (0.08 + 0.3 * l) * flick;
     g.addColorStop(0, `rgba(${glowRGB},${ga})`);
+    g.addColorStop(0.35, `rgba(${glowRGB},${(ga * 0.5).toFixed(3)})`);
+    g.addColorStop(0.7, `rgba(${glowRGB},${(ga * 0.12).toFixed(3)})`);
     g.addColorStop(1, `rgba(${glowRGB},0)`);
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
 
@@ -733,10 +789,10 @@ function renderList() {
     const h = document.createElement("div");
     h.className = "gh";
     h.innerHTML = `<div>${g.icon} ${esc(g.g)}</div><span>${dn}/${g.items.length}</span>`;
-    box.appendChild(h);
+    const col = document.createElement("div"); col.className = "gcol"; col.appendChild(h);
     g.items.forEach(([id, name]) => {
       let label = name;
-      if (id === "push") label += " (" + PUSH_N + " ta)";
+      if (id === "push") label += " (" + pushTarget(sel) + " ta)";
       if (id === "abs") label += " (" + absTarget(sel) + " ta)";
       const isDone = done.includes(id);
       const b = document.createElement("button");
@@ -746,8 +802,9 @@ function renderList() {
       b.querySelector(".tk").append("+" + fmtTok(isDone ? parseFloat(awMap[id]) : rate()));
       b.disabled = locked;
       b.onclick = () => toggle(id);
-      box.appendChild(b);
+      col.appendChild(b);
     });
+    box.appendChild(col);
   });
   if (sel === t) {
     const f = document.createElement("button");
@@ -940,17 +997,19 @@ $("startBtn").onclick = () => {
 
 /* ---- menyu ---- */
 function renderNav() {
-  document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.tab === tab));
+  document.querySelectorAll("#nav button, #topnav button").forEach(b => b.classList.toggle("on", b.dataset.tab === tab));
   ["habits", "shop", "rank", "me"].forEach(k => { $("t-" + k).hidden = k !== tab; });
 }
-$("nav").addEventListener("click", e => {
+const navClick = e => {
   const b = e.target.closest("button[data-tab]");
   if (!b) return;
   if (tab === b.dataset.tab) { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
   tab = b.dataset.tab;
   if (tab === "rank") { board[period] = undefined; loadBoard(); }
   render(); window.scrollTo(0, 0);
-});
+};
+$("nav").addEventListener("click", navClick);
+$("topnav").addEventListener("click", navClick);
 
 function render() {
   renderNav(); renderTop();
